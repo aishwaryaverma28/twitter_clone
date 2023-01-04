@@ -1,0 +1,76 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #8fc4e9;
+}
+.sign_up_container{
+    /* border: 2px solid red; */
+    width: 400px;
+    height: 300px;
+    border-radius: 40px;
+    background: whitesmoke;
+}
+.sign_up_container h2{
+    /* border: 2px solid red; */
+   /* padding: 0 10rem; */
+   text-align: center;
+    margin: 1rem 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.sign_up_container p {
+    padding: 1rem;
+    text-align: center;
+    color: #3e90d0;
+}
+.sign_up_container a {
+    color: #1166a7;
+}
+.logo{
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.logo img{
+    /* border: 2px solid red; */
+    height: 30px;
+    width: 40px;
+    /* margin-bottom: 15px; */
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+input{
+    width: 90%;
+    padding: 0.5rem 2rem;
+    text-align: center;
+    border-radius: 10px;
+    background: #6facdc;
+    color: white;
+    border: none;
+    box-shadow: 0px 4px 24px #b5d6ee, inset 6px 6px 12px #63a5d9, inset -12px -12px 24px #3e90d0;
+}
+::placeholder{
+    color: white;
+}
+.login_btn{
+    transition: 0.2s ease-in-out;
+}
+.login_btn:hover{
+    cursor: pointer;
+    z-index: 1;
+    transition: 0.2s ease-in;
+    box-shadow: 0px 4px 24px #b5d6ee, inset 6px 6px 12px #5b7c96, inset -12px -12px 24px #3e90d0;
+}
