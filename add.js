@@ -60,3 +60,107 @@ window.onload = async () => {
     getTweetsAndInsertHTML();
 }
 
+document.addEventListener('click', async (event) => {
+    if(event.target.classList.contains('tweet-post-btn')) {
+        const tweetText = document.querySelector('.tweet-post-text').value;
+
+        const data = {
+            title: tweetText,
+            text: "Random Value",
+            userId: "12345"
+        }
+        
+        const tweetResponse = await fetch('https://twitter-backend-6yot.onrender.com/tweet/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+
+        const tweet = await tweetResponse.json();
+
+        if(tweet.status !== 200) {
+            alert(tweet.message);
+            return;
+        }
+
+        document.querySelector('.tweet-post-text').value = "";
+        alert(tweet.message);
+    }
+
+    if(event.target.classList.contains('tweet-delete')) {
+
+        if(confirm("Are you sure you want to delete this tweet?")) {
+            const tweetId = event.target.getAttribute('data-id');
+
+            const data = {
+                tweetId,
+                userId: "12345"
+            };
+
+            const response = await fetch('https://twitter-backend-6yot.onrender.com/tweet/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+
+            const result = await response.json();
+
+            if(result.status !== 200) {
+                alert(result.message);
+                return;
+            }
+            
+            alert("Tweet deleted successfuly");
+            document.getElementById(tweetId).remove();
+        }
+    }
+
+    if(event.target.classList.contains('tweet-edit')) {
+        const tweetId = event.target.getAttribute('data-id');
+
+        const span = document.getElementById('span-' + tweetId);
+
+        const tweetText = prompt("Enter new tweet text", span.innerText);
+
+        const data = {
+            tweetId,
+            title: tweetText,
+            text: "Random value",
+            userId: "12345"
+        }
+
+        const response = await fetch('https://twitter-backend-6yot.onrender.com/tweet/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+
+        const result = await response.json();
+
+        if(result.status !== 200) {
+            alert(result.message);
+            return;
+        }
+
+        alert("Updated Successfully");
+        span.innerText = tweetText;
+    }
+}) 
+
+
+window.addEventListener('scroll', () => {
+    const {
+        scrollTop,
+        scrollHeight,
+        clientHeight
+    } = document.documentElement;
+    if((scrollTop + clientHeight) >= (scrollHeight - 20)) {
+        getTweetsAndInsertHTML();
+    }
+})
